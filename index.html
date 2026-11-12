@@ -62,6 +62,22 @@
   <div class="sheet" id="sheet" role="dialog" aria-modal="true"></div>
   <div class="toast" id="toast" role="status"></div>
 
+  <!-- Vises kun hvis appen ikke kan starte (fx en fil der mangler) -->
+  <div id="boot-error" class="auth" hidden><div class="card"><h2>Appen kunne ikke starte</h2><p class="small" id="boot-msg"></p><button class="btn" onclick="location.reload()">Prøv igen</button></div></div>
+  <script>
+    window.addEventListener("error", function (e) {
+      var t = e.target && (e.target.src || e.target.href);
+      document.getElementById("boot-msg").textContent = t ? "Kunne ikke hente " + t : (e.message || "Ukendt fejl");
+      document.getElementById("boot-error").hidden = false;
+    }, true);
+    setTimeout(function () {
+      var ids = ["auth-view", "setup-view", "app"];
+      if (ids.every(function (i) { return document.getElementById(i).hidden; })) {
+        document.getElementById("boot-msg").textContent = document.getElementById("boot-msg").textContent || "Appen svarer ikke. Tjek internetforbindelsen.";
+        document.getElementById("boot-error").hidden = false;
+      }
+    }, 10000);
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.2/dist/umd/supabase.js"></script>
   <script src="config.js"></script>
   <script type="module" src="js/app.js"></script>

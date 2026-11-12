@@ -1,6 +1,6 @@
 // Service worker: offline, notifikationer og tryk på notifikationer.
 // Hæv versionen når filerne ændres, så telefonen henter den nye udgave.
-const CACHE = "ms-kompasset-v1";
+const CACHE = "ms-kompasset-v2";
 const FILES = [
   "./",
   "index.html",
