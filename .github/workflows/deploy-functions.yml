@@ -5,7 +5,7 @@ name: Deploy Supabase-funktioner
 on:
   push:
     branches: [main]
-    paths: ["supabase/functions/**", "supabase/config.toml"]
+    paths: ["supabase/functions/**", "supabase/config.toml", ".github/workflows/deploy-functions.yml"]
   workflow_dispatch:
 
 jobs:
@@ -24,13 +24,13 @@ jobs:
           else
             echo "ok=true" >> "$GITHUB_OUTPUT"
           fi
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         if: steps.check.outputs.ok == 'true'
       - uses: supabase/setup-cli@v1
         if: steps.check.outputs.ok == 'true'
         with:
           version: latest
       - if: steps.check.outputs.ok == 'true'
-        run: supabase functions deploy notify --project-ref "$PROJECT_REF"
+        run: supabase functions deploy notify --project-ref "$PROJECT_REF" --yes
       - if: steps.check.outputs.ok == 'true'
-        run: supabase functions deploy analyze-notes --project-ref "$PROJECT_REF"
+        run: supabase functions deploy analyze-notes --project-ref "$PROJECT_REF" --yes
