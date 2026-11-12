@@ -2,7 +2,7 @@
 # Kører migrationen og RLS-testen mod en midlertidig lokal Postgres (kræver postgresql-16).
 set -euo pipefail
 cd "$(dirname "$0")"
-PGBIN=${PGBIN:-/usr/lib/postgresql/16/bin}
+PGBIN=${PGBIN:-$(ls -d /usr/lib/postgresql/*/bin 2>/dev/null | sort -V | tail -1)}
 DIR=$(mktemp -d)
 chown postgres "$DIR" 2>/dev/null || true
 RUN() { if [ "$(id -u)" = 0 ]; then su postgres -c "$*"; else bash -c "$*"; fi; }
