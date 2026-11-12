@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <!-- PLADSHOLDER – erstattes af det rigtige logo. Se branding/README.md -->
+  <rect width="512" height="512" fill="#4E5736"/>
+  <g fill="none" stroke="#F4EFE3" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" transform="translate(64 64) scale(16)">
+    <circle cx="12" cy="12" r="9"/>
+    <path d="M15.5 8.5l-2 5-5 2 2-5z"/>
+  </g>
+</svg>

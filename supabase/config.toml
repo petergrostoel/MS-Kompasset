@@ -1,0 +1,10 @@
+# Supabase CLI-konfiguration for MS Kompasset.
+project_id = "MS-Kompasset"
+
+[functions.notify]
+# Kaldes af cron-jobbet med en hemmelig header (CRON_SECRET), ikke af brugere.
+verify_jwt = false
+
+[functions.analyze-notes]
+# Login tjekkes inde i funktionen (virker med de nye publishable-nøgler).
+verify_jwt = false
