@@ -6,7 +6,7 @@ PGBIN=${PGBIN:-$(ls -d /usr/lib/postgresql/*/bin 2>/dev/null | sort -V | tail -1
 DIR=$(mktemp -d)
 chown postgres "$DIR" 2>/dev/null || true
 RUN() { if [ "$(id -u)" = 0 ]; then su postgres -c "$*"; else bash -c "$*"; fi; }
-RUN "$PGBIN/initdb -D $DIR/data -A trust" >/dev/null
+RUN "$PGBIN/initdb -D $DIR/data -A trust -U postgres" >/dev/null
 RUN "$PGBIN/pg_ctl -D $DIR/data -o '-p 5439 -k $DIR' -l $DIR/log -w start" >/dev/null
 trap 'RUN "$PGBIN/pg_ctl -D $DIR/data -m immediate stop" >/dev/null; rm -rf "$DIR"' EXIT
 P="psql -h $DIR -p 5439 -U postgres -q -v ON_ERROR_STOP=1"
