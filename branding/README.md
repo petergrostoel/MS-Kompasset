@@ -8,7 +8,8 @@ Alt, der har med logoet at gøre, ligger i denne mappe. Koden skal ikke ændres,
 | `icon-180.png` | Ikonet på iPhonens hjemmeskærm | 180 × 180 px |
 | `icon-192.png` | Ikon til notifikationer og Android | 192 × 192 px |
 | `icon-512.png` | Stort ikon (fx ved installation) | 512 × 512 px |
-| `logo-placeholder.svg` | Pladsholderen (kompasset), som filerne ovenfor er lavet ud fra | |
+| `logo-original.png` | Peters logo i fuld størrelse (1024 × 1024), som filerne ovenfor er lavet ud fra | |
+| `logo-placeholder.svg` | Den gamle pladsholder (bruges ikke længere) | |
 
 ## Sådan skifter du til det rigtige logo
 

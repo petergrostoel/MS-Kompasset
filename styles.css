@@ -247,3 +247,8 @@ body{margin:0;overscroll-behavior-y:none}
 .sheet .x-close{position:absolute;right:12px;top:10px;width:36px;height:36px;border-radius:10px;display:grid;place-items:center;color:var(--muted)}
 .sheet{position:fixed}
 .tl .dur{white-space:nowrap}.tl .body .nm{overflow-wrap:anywhere}
+/* Bundark: altid plads til alle fem energivalg (iOS-visning kan ændre vh efter genåbning) */
+.sheet{max-height:88vh;max-height:calc(100dvh - env(safe-area-inset-top,0px) - 12px);-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.sheet>*{flex-shrink:0}
+.sheet .scale{gap:6px}
+.sheet .scale button{min-height:46px;padding:10px 14px}

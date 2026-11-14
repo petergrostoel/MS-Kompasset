@@ -11,9 +11,11 @@ globalThis.Deno = { env: { get: (k) => env[k] }, serve: (h) => (handler = h) };
 const ua = nodeCrypto.createECDH("prime256v1"); ua.generateKeys();
 const b64u = (b) => Buffer.from(b).toString("base64url");
 const now = new Date();
+// Fast pause lige nu, så testen virker uanset tidspunkt på dagen
+const hhmm = now.toISOString().slice(11, 16);
 const calls = [];
 const db = {
-  households: [{ id: "h1", settings: { fixedWeek: ["00:00"], fixedWeekend: ["00:00"], tz: "UTC" } }],
+  households: [{ id: "h1", settings: { fixedWeek: [hhmm], fixedWeekend: [hhmm], tz: "UTC" } }],
   members: [{ user_id: "d", household_id: "h1", role: "patient", settings: {} }],
   push_subscriptions: [{ endpoint: "https://push.example.com/abc", user_id: "d", p256dh: b64u(ua.getPublicKey()), auth: b64u(nodeCrypto.randomBytes(16)) }],
   reminders: [], activities: [], training_log: [], day_reviews: [], notes: [],

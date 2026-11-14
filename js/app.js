@@ -220,7 +220,7 @@ V.home = () => {
       ? `<button class="active-banner" data-go="energy"><span class="pulse"></span><span style="flex:1"><b>${A.l}</b> er i gang<br><span class="small elapsed" data-start="${Date.parse(a.started_at)}">${dur(Date.now() - Date.parse(a.started_at))}</span> · tryk for at stoppe</span>${ic("chev")}</button>`
       : `<div class="card flat"><div class="row"><span class="av">${esc(patientName()[0])}</span><span class="small">${esc(patientName())} er i gang med <b>${A.l.toLowerCase()}</b> (<span class="elapsed" data-start="${Date.parse(a.started_at)}">${dur(Date.now() - Date.parse(a.started_at))}</span>)</span></div></div>`;
   }
-  html += `<button class="card status-card" data-go="energy"><div class="head"><span class="ic">${ic("bolt")}</span><h2>Energi</h2>${ic("chev")}</div>
+  html += `<button class="card status-card" data-go="energy"><div class="head"><span class="ic">${ic("bolt")}</span><h2>Aktivitet</h2>${ic("chev")}</div>
     <div><div class="eyebrow">${isP() ? "Mit gæt på din energi lige nu" : `Gæt på ${esc(patientName())}s energi lige nu`}</div><div class="big" style="margin-top:4px">${e.t}</div></div><div class="small muted">${e.s}</div></button>`;
   html += `<button class="card status-card" data-go="food"><div class="head"><span class="ic">${ic("leaf")}</span><h2>Sundhed og kost</h2>${pill(f.st)}</div>
     <div class="row between"><div><span class="big">${f.total}</span><span class="muted"> / ${GOAL} forskellige</span></div><span class="small muted">sidste 7 dage</span></div>
@@ -289,11 +289,10 @@ V.energy = () => {
         <div class="q" style="font-weight:600">Stop aktiviteten: Hvordan er din energi lige nu?</div>${scaleHTML("stop")}
         <p class="small muted" style="margin:0">Dit valg gemmes med det samme.</p></div>`;
     } else {
-      const tile = (k) => `<button class="tile ${ACT[k].k === "gain" ? "gain" : ""} ${UI.sel === k ? "sel" : ""}" data-act="selAct" data-k="${k}">${ACT[k].l}</button>`;
-      h += `<div class="card"><div class="eyebrow">Start en aktivitet</div>
+      const tile = (k) => `<button class="tile ${ACT[k].k === "gain" ? "gain" : ""}" data-act="startAct" data-k="${k}">${ACT[k].l}</button>`;
+      h += `<div class="card"><div class="eyebrow">Start en aktivitet</div><div class="small muted">Tryk på en aktivitet for at starte den.</div>
         <div class="small muted">Tager energi</div><div class="tiles">${DRAIN.map(tile).join("")}</div>
-        <div class="small muted">Giver energi</div><div class="tiles">${GAIN_START.map(tile).join("")}</div>
-        <button class="btn wide" data-act="startAct" ${UI.sel ? "" : "disabled"}>${UI.sel ? "Start " + ACT[UI.sel].l.toLowerCase() : "Vælg en aktivitet"}</button></div>`;
+        <div class="small muted">Giver energi</div><div class="tiles">${GAIN_START.map(tile).join("")}</div></div>`;
     }
   } else {
     const e = eguess();
@@ -752,11 +751,10 @@ document.addEventListener("click", async (ev) => {
   const a = active();
   switch (d.act) {
     case "closeSheet": closeSheet(); break;
-    case "selAct": UI.sel = d.k; render(true); break;
     case "startAct":
-      if (!UI.sel || active()) return;
-      toast(`${ACT[UI.sel].l} er startet`);
-      startActivity(UI.sel);
+      if (!ACT[d.k] || active()) return;
+      toast(`${ACT[d.k].l} er startet`);
+      startActivity(d.k);
       go("home");
       break;
     case "energy": {
