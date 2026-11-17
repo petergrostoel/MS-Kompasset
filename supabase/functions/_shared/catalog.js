@@ -5,7 +5,8 @@ export const ACT = {
   solo: { l: "Arbejde alene", k: "drain", def: 90 },
   mode: { l: "Arbejdsmøde", k: "drain", def: 45 },
   transport: { l: "Transport", k: "drain", def: 60 },
-  rengoring: { l: "Rengøring / aktiv", k: "drain", def: 45 },
+  rengoring: { l: "Husligt arbejde", k: "drain", def: 45 },
+  shopping: { l: "Shopping", k: "drain", def: 45 },
   gaester: { l: "Få gæster", k: "drain", def: 90 },
   mange: { l: "Mange gæster", k: "drain", def: 50 },
   byen: { l: "I byen", k: "drain", def: 60 },
@@ -14,12 +15,13 @@ export const ACT = {
   samtale: { l: "Samtale", k: "drain", def: 60 },
   spis: { l: "Spisning", k: "gain" },
   hvil: { l: "Pause", k: "gain" },
+  ga: { l: "Gå", k: "gain" },
   pause: { l: "Hjernepause", k: "gain", check: 15 }, // spørger efter 15 min om hun er færdig
   fast: { l: "Fast pause", k: "gain", hidden: true }, // startes kun fra påmindelsen
 };
 
 export const DRAIN = Object.keys(ACT).filter((k) => ACT[k].k === "drain");
-export const GAIN_START = ["spis", "hvil", "pause"];
+export const GAIN_START = ["spis", "hvil", "ga", "pause"];
 
 export const LV = { 5: "Fuld af energi", 4: "Godt med energi", 3: "Middel", 2: "Træt", 1: "Helt udmattet" };
 
